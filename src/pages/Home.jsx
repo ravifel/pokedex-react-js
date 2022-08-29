@@ -25,8 +25,8 @@ export const Home = () => {
       <NavBar />
       <Container maxWidth="false">
         <Grid container>
-          {pokemons.map((pokemon) => (
-            <Grid item xs={3}>
+          {pokemons.map((pokemon, key) => (
+            <Grid item xs={3} key={key}>
               <PokemonCard name={pokemon.name} />
             </Grid>
           ))}

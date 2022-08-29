@@ -24,16 +24,37 @@ export const Home = () => {
       .then((res) => setPokemons(res));
   };
 
+  //percorrer o Array de pokemons e ver se as letras pesquisadas se incluem ao nome de algum pokemon
+  //caso se inclua, vai ser jogado em um novo array
+  //quando a estrutura de repetição terminar, esse array vai ser o novo "setPokemons"
+  const pokemonFilter = (name) => {
+    var filteredPokemons = [];
+
+    if (name === "") {
+      getPokemons();
+    }
+
+    //console.log(name);
+    for (var i in pokemons) {
+      if (pokemons[i].data.name.includes(name)) {
+        filteredPokemons.push(pokemons[i]);
+      }
+    }
+    //console.log(filteredPokemons);
+    setPokemons(filteredPokemons);
+  };
+
   return (
     <div>
-      <NavBar />
+      <NavBar pokemonFilter={pokemonFilter} />
       <Container maxWidth="false">
-        <Grid container spacing={4}>
+        <Grid container spacing={3}>
           {pokemons.map((pokemon, key) => (
-            <Grid item xs={2} key={key}>
+            <Grid item xs={12} sm={6} md={4} lg={2.4} key={key}>
               <PokemonCard
                 name={pokemon.data.name}
                 image={pokemon.data.sprites.front_default}
+                types={pokemon.data.types}
               />
             </Grid>
           ))}

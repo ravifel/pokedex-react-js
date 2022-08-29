@@ -6,9 +6,9 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import "./PokemonCard.css";
 
-export default function PokemonCard() {
+export default function PokemonCard({ name }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, marginRight: "2em", marginBottom: "2em" }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -18,7 +18,7 @@ export default function PokemonCard() {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {name}
           </Typography>
           {/* <Typography variant="body2" color="text.secondary">
             Lizards are a widespread group of squamate reptiles, with over 6,000

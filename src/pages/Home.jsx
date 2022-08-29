@@ -13,21 +13,28 @@ export const Home = () => {
   }, []);
 
   const getPokemons = () => {
-    //fazendo requisição para api atravês do endpoint
-    axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=50")
-      .then((response) => setPokemons(response.data.results))
-      .catch((error) => console.log(error));
+    var endpoints = [];
+    for (var i = 1; i < 50; i++) {
+      endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
+    }
+    console.log(endpoints);
+
+    var response = axios
+      .all(endpoints.map((endpoint) => axios.get(endpoint)))
+      .then((res) => setPokemons(res));
   };
 
   return (
     <div>
       <NavBar />
       <Container maxWidth="false">
-        <Grid container>
+        <Grid container spacing={4}>
           {pokemons.map((pokemon, key) => (
-            <Grid item xs={3} key={key}>
-              <PokemonCard name={pokemon.name} />
+            <Grid item xs={2} key={key}>
+              <PokemonCard
+                name={pokemon.data.name}
+                image={pokemon.data.sprites.front_default}
+              />
             </Grid>
           ))}
         </Grid>

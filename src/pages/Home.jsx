@@ -19,7 +19,7 @@ export const Home = () => {
     }
     console.log(endpoints);
 
-    var response = axios
+    axios
       .all(endpoints.map((endpoint) => axios.get(endpoint)))
       .then((res) => setPokemons(res));
   };
